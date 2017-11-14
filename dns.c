@@ -239,9 +239,17 @@ int* whichIP(struct in_addr myaddr)
     and5=inet_addr(submask5) & myaddr.s_addr;
     and6=inet_addr(submask6) & myaddr.s_addr;
     and7=inet_addr(submask7) & myaddr.s_addr;
-    char* result_string5 = inet_ntoa(*(struct in_addr*)&and5);
-    char* result_string6 = inet_ntoa(*(struct in_addr*)&and6);
-    char* result_string7= inet_ntoa(*(struct in_addr*)&and7);
+
+    char result_string5[15]={0};
+    char  result_string6[15]={0};
+    char  result_string7[15]={0};
+    strcpy(result_string5,inet_ntoa(*(struct in_addr*)&and5));
+    strcpy(result_string6,inet_ntoa(*(struct in_addr*)&and6));
+    strcpy(result_string7,inet_ntoa(*(struct in_addr*)&and7));
+
+    /*result_string5 =inet_ntoa(*(struct in_addr*)&and5);
+    result_string6 = inet_ntoa(*(struct in_addr*)&and6);
+    result_string7= inet_ntoa(*(struct in_addr*)&and7);*/
     if(strcmp(result_string5,cr5)==0)
     {
         *clientIPdomain=5;
@@ -261,8 +269,8 @@ int* whichIP(struct in_addr myaddr)
 /* process standard query  */
 int process_std_query(const char *recv_buf, const unsigned int len, char *send_buf, unsigned int *plen, struct in_addr mysinaddr)
 {
-    //int * myDomain=whichIP(mysinaddr);
-    //printf("the domain is %d\n",*myDomain);
+    int * myDomain=whichIP(mysinaddr);
+    printf("the domain is %d\n",*myDomain);
     char notestr[17]="printf and result";
     char submask5[12]="255.255.255.255";
 
