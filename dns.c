@@ -234,6 +234,7 @@ int* whichIP(struct in_addr myaddr)
     char cr6[]="10.11.6.0";
     char cr7[]="10.11.7.0";  //correct "and" operation --string result
     int *clientIPdomain=NULL;
+    int a;
     in_addr_t and5,and6,and7;
 
     and5=inet_addr(submask5) & myaddr.s_addr;
@@ -252,15 +253,18 @@ int* whichIP(struct in_addr myaddr)
     result_string7= inet_ntoa(*(struct in_addr*)&and7);*/
     if(strcmp(result_string5,cr5)==0)
     {
-        *clientIPdomain=5;
+        a=5;
+        clientIPdomain=&a;
     }
     else if(strcmp(result_string6,cr6)==0)
     {
-        *clientIPdomain=6;
+        a=6;
+        clientIPdomain=&a;
     }
     else if(strcmp(result_string7, cr7)==0)
     {
-        *clientIPdomain=7;
+        a=7;
+        clientIPdomain=&a;
     }
     return clientIPdomain;
 
